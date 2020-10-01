@@ -1,20 +1,20 @@
 (function(){
 	
-
-	if(! localStorage.getItem("GOJIRA_CONFIG")) {
-
-		// If this is the first time running or there is no current config,
-		// this will set a parameter and cause it to open the config dialog (see bottom)
+	// If this is the first time running or there is no current config,
+	// this will set a parameter and cause it to open the config dialog (see bottom)
+	if(! localStorage.getItem("GOJIRA_CONFIG")) {	
 		localStorage.setItem("GOJIRA_CONFIG",  JSON.stringify({ "initialized": false })  );
-
-	} 
+	}
 	var CFG = JSON.parse(localStorage.getItem("GOJIRA_CONFIG"));
-		
-	/*
+
+	
+	/**
+	 * submitQuery - submit the "query" and split it up into seperate ticket links.
+	 * 
 	 * ABC-123/212/198 <-- opens up multiple tickets of the samne project
 	 * ABC-123,XYZ-212,FOO-999 <-- opens multiple tickets of the same project
-	 * ABC-123/212/198,XYZ-212,FOO-111/999 <-- opens multiple tickets of mixed projects
-	*/
+	 * ABC-123/212/198,XYZ-212,FOO-111/999 <-- opens multiple tickets of mixed projects 
+	 */
 	function submitQuery() {
 		var qt = q("#queryText").value;
 		q("#queryText").value = qt.replace(/\s*/g,"");
@@ -61,6 +61,11 @@
 		}
 	}
 	
+	/**
+	 * addToHistory - add a ticket number to the history
+	 * 
+	 * @param {String} item - the item, e.g., "ABC-123"
+	 */
 	function addToHistory(item) {
 		item = item.toUpperCase();
 		var hist = localStorage.getItem("GOJIRA_HIST") || "";
@@ -74,11 +79,17 @@
 		getHistory();
 	}
 	
+	/**
+	 * clearHistory - clear the current history (removes the data from local storage).
+	 */
 	function clearHistory() {
 		localStorage.removeItem("GOJIRA_HIST");
 		getHistory();
 	}
 	
+	/**
+	 * getHistory - get and construct the history items.
+	 */
 	function getHistory() {
 		var hist = localStorage.getItem("GOJIRA_HIST") || "";
 		var histItems = hist == "" ? [] : hist.split(",").reverse();
@@ -98,6 +109,9 @@
 		q("#histItems").innerHTML = html;		
 	}
 
+	/**
+	 * addPrefixes - construct and add prefix buttons to the UI
+	 */
 	function addPrefixes() {
 		if(CFG.PROJECT_PREFIXES) {
 			q("#projectPrefixes").innerHTML = "";
@@ -117,6 +131,8 @@
 	addPrefixes();
 	
 	
+	// ------------ Various event handlers -----------------------
+
 	q("#goButton").onclick = submitQuery;
 	q("#queryText").onkeyup = function(evt) {
 		if(evt.key == "Enter") {
@@ -136,7 +152,7 @@
 	
 	
 	
-
+	// Construct the Help Dialog
 	const helpDialog = new Dialog({
 		title: "Help/About",
 		target: "#helpAboutDialog",
@@ -144,6 +160,7 @@
 	});
 
 	
+	// Construct the configuration dialog
 	const configDialog = new Dialog({
 		title: "Configuration",	
 		target: "#configDialog",
@@ -154,7 +171,7 @@
 	
 
 
-
+	// Save configuration handler
 	q("#configSaveButton").onclick = () => {
 		let cfg = localStorage.getItem("GOJIRA_CONFIG");
 		let cfgAsJson = {};
@@ -170,6 +187,7 @@
 		addPrefixes();
 	}
 
+	// Populate the values in the config dialog
 	function handleConfigDialog() {
 		let cfg = localStorage.getItem("GOJIRA_CONFIG");
 		let cfgAsJson;
@@ -183,20 +201,14 @@
 
 
 
-	
+	// Construct the URL for the create issue link and add handler
 	q("#createLink").href = CFG.JIRA_BASE_URL + "/secure/CreateIssue!default.jspa";
 	q("#createButton").onclick = function(){
 		q("#createLink").click()
 	}
 		
-	function toggle(node) {
-		if(node.style.display == "block") {
-			node.style.display = "none";
-		} else {
-			node.style.display = "block";
-		}
-	}
 	
+	// Call things when page is finished loading
 	document.addEventListener("DOMContentLoaded", function(){
 		getHistory();
 	});
