@@ -1,11 +1,15 @@
 (function(){
-
-	let cfg = localStorage.getItem("GOJIRA_CONFIG");
-	if(cfg) {
-		CFG = JSON.parse(cfg);
-	}
-
 	
+
+	if(! localStorage.getItem("GOJIRA_CONFIG")) {
+
+		// If this is the first time running or there is no current config,
+		// this will set a parameter and cause it to open the config dialog (see bottom)
+		localStorage.setItem("GOJIRA_CONFIG",  JSON.stringify({ "initialized": false })  );
+
+	} 
+	var CFG = JSON.parse(localStorage.getItem("GOJIRA_CONFIG"));
+		
 	/*
 	 * ABC-123/212/198 <-- opens up multiple tickets of the samne project
 	 * ABC-123,XYZ-212,FOO-999 <-- opens multiple tickets of the same project
@@ -58,7 +62,6 @@
 	}
 	
 	function addToHistory(item) {
-		debugger
 		item = item.toUpperCase();
 		var hist = localStorage.getItem("GOJIRA_HIST") || "";
 		var histItems = hist == "" ? [] : hist.split(",");
@@ -95,18 +98,21 @@
 		q("#histItems").innerHTML = html;		
 	}
 
-	function addPrefixes() {		
-		var prefixes = CFG.PROJECT_PREFIXES.split(",") || [];
-		prefixes.forEach(function(v) {
-			var pf = q(".prefixItemTemplate").cloneNode(true);
-			pf.querySelector(".projectPrefix").innerText = v.trim();
-			pf.querySelector(".projectPrefix").onclick = function(){				
-				q("#queryText").value = this.innerText + "-";
-				q("#queryText").focus();
-			}			
-			q("#projectPrefixes").appendChild(pf);
-			pf.style.display="";
-		});		
+	function addPrefixes() {
+		if(CFG.PROJECT_PREFIXES) {
+			q("#projectPrefixes").innerHTML = "";
+			var prefixes = CFG.PROJECT_PREFIXES.split(",") || [];
+			prefixes.forEach(function(v) {
+				var pf = q(".prefixItemTemplate").cloneNode(true);
+				pf.querySelector(".projectPrefix").innerText = v.trim();
+				pf.querySelector(".projectPrefix").onclick = function(){				
+					q("#queryText").value = this.innerText + "-";
+					q("#queryText").focus();
+				}			
+				q("#projectPrefixes").appendChild(pf);
+				pf.style.display="";
+			});		
+		}
 	}
 	addPrefixes();
 	
@@ -155,12 +161,13 @@
 		if(cfg) {
 			cfgAsJson = JSON.parse(cfg);
 		}
-
-		cfgAsJson.JIRA_BASE_URL = q("#jiraBaseUrl").value;
+		cfgAsJson.JIRA_BASE_URL = q("#jiraBaseUrl").value.replace(/\/$/,"");
 		cfgAsJson.PROJECT_PREFIXES = q("#projectList").value;
+		cfgAsJson.initialized = "true";
 		localStorage.setItem("GOJIRA_CONFIG", JSON.stringify(cfgAsJson));
 		configDialog.close();
 		CFG = cfgAsJson;
+		addPrefixes();
 	}
 
 	function handleConfigDialog() {
@@ -168,9 +175,9 @@
 		let cfgAsJson;
 		if(cfg) {
 			cfgAsJson = JSON.parse(cfg);
-
-			q("#jiraBaseUrl").value = cfgAsJson.JIRA_BASE_URL;
-			q("#projectList").value = cfgAsJson.PROJECT_PREFIXES;			
+			
+			q("#jiraBaseUrl").value = cfgAsJson.JIRA_BASE_URL || "";
+			q("#projectList").value = cfgAsJson.PROJECT_PREFIXES || "";			
 		}
 	}
 
@@ -193,5 +200,13 @@
 	document.addEventListener("DOMContentLoaded", function(){
 		getHistory();
 	});
-	
-})()
+
+
+	// Automatically opne the config dialog if no configuration exists
+	if(CFG.initialized == false) {
+		setTimeout(()=>{
+			q("#configLink").click();
+		},500);
+		
+	}	
+})();
