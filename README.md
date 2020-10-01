@@ -15,4 +15,4 @@ After installing, to get Gojira working for your project, click the <b>configure
 Very simple - just checkout the source and run locally. There is no build. Gojira runs on ES6 JavaScript, which is supported by most modern browsers. It uses plain JavaScript, CSS, and HTML, so no preprocessors and transpilers are required.
 
 ## License
-This software is free and open source and is covered under the generic MIT License. See the LICESNE file included in this repository.
+This software is free and open source and is covered under the generic MIT License. See the LICENSE file included in this repository.
