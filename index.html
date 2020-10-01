@@ -1,0 +1,132 @@
+<html>
+
+	<head>
+		<title>Gojira</title>
+		<link rel="stylesheet" href="app.css">
+	</head>
+
+	<body>
+		<div class="page">
+			<div id="banner">
+				<img src="gojira.png">
+				</dvi>
+				<div class="centered" id="helpAboutLinkWrapper">
+					<a href="#" class="link" id="helpAboutLink">Help! About?</a>
+					<a href="#" class="link" id="configLink">Configure</a>
+				</div>
+
+
+				<div id="helpAboutDialog">
+					<div class="content">
+						<p>Gojira v1.3 (September 2020), by James Pino</p>
+						<p>
+							Gojira helps open and create multiple Jira tickets quickly and easily without having to wait for
+							a page to load! To get Gojira working for your project, click the <b>configure</b> button and
+							enter
+							your Jira's base URL and a comma-separated list of project prefixes. That's it!
+						<p>
+
+						<p>Here's how it works:</p>
+
+						<p>Open a single ticket:</p>
+						<code>ABC-123</code>
+
+						<p>Open multiple tickets of the samne project:</p>
+						<code>ABC-123/212/198</code>
+
+						<p>Open a ticket for several different projects:</p>
+						<code>ABC-123,XYZ-212,FOO-999</code>
+
+						<p>Open multiple tickets for multiple projects:</p>
+						<code>ABC-123/212/198,XYZ-212,FOO-111/999</code>
+					</div>
+
+				</div>
+
+
+				<div id="configDialog">
+					<div class="content">
+
+						<table>
+							<tr>
+								<td>
+									<label for="jiraBaseUrl">
+										Jira base URL:
+									</label>
+								</td>
+								<td>
+									<input id="jiraBaseUrl">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="projectList">
+										Project list (comma-sperated):
+									</label>
+								</td>
+								<td>
+									<input id="projectList">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<button id="configSaveButton">Save</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+
+				<div id="projectPrefixes">
+					<span class="prefixItemTemplate" style="display: none;">
+						<span class='prefixContainer' title="Insert this project prefix">
+							<span class="projectPrefix">
+								ABC-
+							</span>
+						</span>
+					</span>
+				</div>
+
+				<div>
+					<input type="text" id="queryText" class="text-input" placeholder="ticket number">`
+				</div>
+
+
+
+				<input type="button" value="Go" id="goButton" class="button blue">
+				<input type="button" value="Create" id="createButton" class="button green">
+				<a href="#" target="tab" id="createLink">___</a>
+
+
+				<br><br>
+
+				<div id="multiSection" class="linksSection" style="display: none;">
+					<h4>Auto-Generated Multiple Links:</h4>
+					<!--[ <a href="#" id="clearMultiButton">Clear</a> ]-->
+					<input type="button" value="Clear" id="clearMultiButton" class="button red narrow">
+					<br><br>
+					<div id="multiItems">
+
+					</div>
+
+				</div>
+
+				<div id="histSection" class="linksSection">
+					<h4>History</h4>
+					<!--[ <a href="#" id="clearHistButton">Clear</a> ] -->
+					<input type="button" value="Clear" id="clearHistButton" class="button red narrow">
+					<br><br>
+					<div id="histItems">
+
+					</div>
+				</div>
+			</div>
+
+			<script src="q.js"></script>
+			<!-- <script src="config.js"></script> -->
+			<script src="Dialog.js"></script>
+			<script src="app.js"></script>
+	</body>
+
+</html>

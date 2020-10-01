@@ -1,0 +1,251 @@
+.page {
+	font-family: arial;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.page .text-input, .button {
+	display: block;
+	width: 50%;
+	margin: auto;
+	text-align: center;
+}
+
+.page .text-input {
+	margin-top: 0.3em;
+	font-size: 2em;
+	border: 1px inset #ccc;
+	border-radius: 2px;
+	background-color: rgba(200,200,200, 0.1);
+	text-transform: uppercase;
+	color: #444;
+
+}
+
+.page .text-input::placeholder {
+	color: rgba(200,200,200,0.3);
+	text-transform: none;
+}
+
+.page .text-input:focus {
+	outline: none;
+}
+
+.page .button {	
+	border:0px;	
+	box-shadow: 4px 4px 4px #ccc;
+	margin-top: 1em;
+	height: 3em;
+	color: #777;
+	font-size: 12pt;
+}
+
+.page .button.blue {
+	background-color: aliceblue;
+}
+
+.page .button.green {
+	background-color: rgba(0,255,0,0.03);
+}
+
+
+.page .button.red {
+	background-color: rgba(255,0,0,0.03);
+}
+
+.page .button.narrow {
+	width: auto;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+
+.page .linksSection {
+	width: 50%;
+	margin: auto;
+}
+
+.page .linksSection h4 {
+	color: #777;
+	border-bottom: 1px solid #ccc;
+}
+
+.page .linksSection a,
+.page .linksSection a:visited {
+	color: #888;
+	text-decoration: none;
+	margin-right: 0.5em;
+}
+
+.page .linksSection #histItems,
+.page .linksSection #multiItems {
+	text-transform: uppercase;
+}
+
+.page #helpAboutLinkWrapper {
+	margin-top: 1em;
+}
+
+.page a.link,
+.page a.link:visited {
+	color: #ccc;
+	text-decoration: none;
+}
+
+.page a#configLink {
+	float: right;
+}
+
+.page .centered {
+	width: 50%;
+	margin: auto;
+	text-align: left;
+}
+
+
+.page .dialog {
+
+	text-align: left;
+	margin-bottom:0;
+	display: none;
+	font-size: 10pt;
+	background-color: transparent;
+	border: 1px solid rgba(100,100,100,0.1);
+	border-radius: 3px;
+	color: #555;
+	position: absolute;
+	left: 25%;
+	box-shadow: 4px 3px 10px #ccc;
+	max-width: 40%;
+}
+
+.page .dialog .header {
+	border-bottom: 1px solid #ccc;
+	background-color: #eeeeeeee;
+	display: table;
+	width: 100%;
+}
+
+.page .dialog .header button {
+	border: 0;
+	color: #777;
+}
+
+.page .dialog .header h3 {
+	margin: 0;
+	padding: none;
+	border: none;
+}
+
+.page .dialog .header .left,
+.page .dialog .header .right {
+	display: table-cell;
+	vertical-align: bottom;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background-color: #cccccc0f;
+}
+
+.page .dialog .header .left {
+	padding-left: 1em;
+}
+
+.page .dialog .header .right {
+	text-align: right;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+.page .dialog .content {
+	padding: 1.5em;
+	background-color: #fff;
+}
+
+.page .dialog code {
+	display: inline;
+	color: red;
+	border: 1px solid rgba(255,0,0,0.1);
+	border-radius: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.page .dialogHeader {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 2em;
+}
+
+.page .configSection {
+	display: none;
+}
+
+
+
+.page #createLink {
+	display: none;
+}
+
+.page .projectPrefix {	
+    border: 1px solid #ccc;
+    background-color:aliceblue;    
+    padding-left: 0.5em;
+    padding-right: 0.4em;
+    font-size: small;
+    border-radius: 10px; 
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #777;
+}
+
+
+.page .prefixItemTemplate:hover {
+	cursor: pointer;
+}
+
+@media(max-width: 1200px) {
+	.page #banner img {
+		width: 400px;
+	}	
+}
+
+
+@media(max-width: 900px) {
+	.page #banner img {
+		width: 350px;
+	}
+
+	.page {
+		width: 80%;
+	}
+}
+
+@media(max-width: 700px) {
+	
+	.page {
+		width: 90%;
+	}
+	.page .text-input, .button {	
+		width: 70%;		
+    }
+}
+
+@media(max-width: 550px) {
+	.page #banner img {
+		width: 300px;
+	}
+
+	.page {
+		width: 100%;		
+	}
+
+
+
+}
+
+
