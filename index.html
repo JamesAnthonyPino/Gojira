@@ -18,13 +18,16 @@
 
 				<div id="helpAboutDialog">
 					<div class="content">
-						<p>Gojira v1.3 (September 2020), by James Pino</p>
+						<p>Gojira v1.4 (January 2021), by James Pino</p>
 						<p>
 							Gojira helps open and create multiple Jira tickets quickly and easily without having to wait for
 							a page to load! To get Gojira working for your project, click the <b>configure</b> button and
-							enter
-							your Jira's base URL and a comma-separated list of project prefixes. That's it!
+							enter your Jira's base URL and a comma-separated list of your favorite project prefixes. That's it!
+						<p>									
 						<p>
+							Check out the <a target="_tab" href="https://github.com/JamesAnthonyPino/Gojira">GitHub repository</a> 
+							if you'd like to contribute.<br>								
+						</p>
 
 						<p>Here's how it works:</p>
 
@@ -118,11 +121,19 @@
 				<div id="histSection" class="linksSection">
 					<h4>History</h4>
 					<!--[ <a href="#" id="clearHistButton">Clear</a> ] -->
-					<input type="button" value="Clear" id="clearHistButton" class="button red narrow">
-					<br><br>
-					<div id="histItems">
+					<input type="button" value="Clear" id="initClearHistButton" class="button inline red narrow">
+					<input type="button" value="Sort Alphabeticaly" id="sortHistButton" class="button inline green narrow" data-sorted="false">
 
+					<div style="display: none;" id="confirmClearHistBox">
+						<p>Really clear history?</p>
+						<input type="button" value="Clear" id="clearHistButton" class="button inline red narrow">
+						<input type="button" value="Nope" id="cancelClearHistButton" class="button inline narrow">
 					</div>
+					
+					<!--  HISTORY ITEMS -->
+					<br><br>
+					<ul id="histItems" class="history-list">		
+					</ul>
 				</div>
 			</div>
 

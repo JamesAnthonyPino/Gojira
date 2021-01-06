@@ -86,11 +86,28 @@
 		localStorage.removeItem("GOJIRA_HIST");
 		getHistory();
 	}
+
+	function clearHistoryItem(item) {
+		let itemText = localStorage.getItem("GOJIRA_HIST");
+		if(itemText) {
+			let items = localStorage.getItem("GOJIRA_HIST").split(",");
+			let itemToRemove = items.indexOf(item);
+			items.splice(itemToRemove,1);
+
+			let itemsToStore = items.join(",");
+			localStorage.setItem("GOJIRA_HIST", itemsToStore);
+			getHistory();
+		}
+		
+	}
 	
 	/**
 	 * getHistory - get and construct the history items.
 	 */
-	function getHistory() {
+	function getHistory(sort) {
+
+		q("#histItems").innerHTML = "";
+
 		var hist = localStorage.getItem("GOJIRA_HIST") || "";
 		var histItems = hist == "" ? [] : hist.split(",").reverse();
 		var html = "";
@@ -99,14 +116,48 @@
 			q("#histSection").style.display = "none";
 			return;
 		}
+
+
+		if(sort) {
+			histItems = histItems.sort(function(a,b) {
+				if(a < b) {
+					return -1;
+				} else if(a > b) {
+					return 1;
+				} else {
+					return 0;
+				}
+			});
+		}
 		
 		q("#histSection").style.display = "";
 		
 		histItems.forEach(function(v,i){
-			html += "<a target='_tab' href='" + CFG.JIRA_BASE_URL + "/browse/" + v + "'>" + v + "</a><br>";
+			let ul = q("#histItems");
+			let li = document.createElement("li");
+			
+			let delLink = document.createElement("a");
+			delLink.href="#"
+			delLink.className = "del-link";
+			delLink.textContent = "x";
+			delLink.onclick = function(evt) {
+				evt.preventDefault();
+				clearHistoryItem(v);
+			}
+
+
+			let itemLink = document.createElement("a");
+			itemLink.className = "item-link";
+			itemLink.target = "_tab";
+			itemLink.setAttribute("data-item-uid", v);
+			itemLink.href = `${CFG.JIRA_BASE_URL}/browse/${v}`;
+			itemLink.textContent = v;
+
+			li.appendChild(delLink);
+			li.appendChild(itemLink);
+			
+			ul.appendChild(li);
 		});
-				
-		q("#histItems").innerHTML = html;		
 	}
 
 	/**
@@ -140,14 +191,37 @@
 		}
 	}
 	
-	q("#clearHistButton").onclick = function() {
-		clearHistory();
+	q("#initClearHistButton").onclick = function() {
+		q("#initClearHistButton").style.display = "none";
+		q("#confirmClearHistBox").style.display = "";
 	}
+
+	q("#clearHistButton").onclick = function() {		
+		clearHistory();				
+	}
+
+	q("#cancelClearHistButton").onclick = function() {
+		q("#confirmClearHistBox").style.display = "none";
+		q("#initClearHistButton").style.display = "";
+	}
+	
 	
 	
 	q("#clearMultiButton").onclick = function() {
 		q("#multiItems").innerHTML = "";
 		q("#multiSection").style.display = "none";
+	}
+
+	q("#sortHistButton").onclick = function() {
+		if(this.getAttribute("data-sorted") == "false") {
+			getHistory(true);
+			this.value = "Sort Chronlogically";	
+			this.setAttribute("data-sorted", "true");
+		} else {
+			getHistory(false);
+			this.value = "Sort Alphabeticaly";
+			this.setAttribute("data-sorted", "false");
+		}
 	}
 	
 	
