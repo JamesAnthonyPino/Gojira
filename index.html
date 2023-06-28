@@ -16,9 +16,9 @@
 				</div>
 
 
-				<div id="helpAboutDialog">
+				<dialog id="helpAboutDialog" class="g-dialog">
 					<div class="content">
-						<p>Gojira v2.0 (July 2023), by James Pino</p>
+						<p>Gojira v2.1 (June 2023), by James Pino</p>
 						<p>
 							Gojira helps open and create multiple Jira tickets quickly and easily without having to wait for
 							a page to load! To get Gojira working for your project, click the <b>configure</b> button and
@@ -42,42 +42,73 @@
 
 						<p>Open multiple tickets for multiple projects:</p>
 						<code>ABC-123/212/198,XYZ-212,FOO-111/999</code>
+
+						<div>
+							<button class="button green" id="helpAboutDialogClose">Ok</button>
+						</div>
 					</div>
+					
+				</dialog>
 
-				</div>
 
-
-				<div id="configDialog">
+				<dialog id="configDialog" class="g-dialog">
 					<div class="content">
+						<div>
+							<label for="jiraBaseUrl">
+								Jira base URL:
+							</label>
+						</div>
+						<div>
+							<input id="jiraBaseUrl" class="dg-text-input">
+						</div>
 
-						<table>
-							<tr>
-								<td>
-									<label for="jiraBaseUrl">
-										Jira base URL:
-									</label>
-								</td>
-								<td>
-									<input id="jiraBaseUrl">
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label for="projectList">
-										Project list (comma-sperated):
-									</label>
-								</td>
-								<td>
-									<input id="projectList">
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<button id="configSaveButton">Save</button>
-								</td>
-							</tr>
-						</table>
+						<br>
+
+						<div>
+							<label for="projectList">
+								Project list (comma-sperated):
+							</label>
+
+						</div>
+						<div>
+							<input id="projectList" class="dg-text-input">
+						</div>
+
+
+						<br>
+						<details>
+							<summary>Data Import</summary>
+
+							<p>
+								Upload a data file to completely <em>replace</em> your current settings and history. 
+								Warning: This cannot be undone!
+							</p>
+							
+							<label for="">						
+							</label>
+							<input type="file" id="data-import" class="dg-text-input">
+
+						</details>
+
+						<details>
+							<summary>Data Export</summary>
+
+							<p>	
+								Export your current settings and history to a data file. This can be imported on another Gojira instance.
+							</p>
+							
+							<button>Export</button>
+
+
+						</details>
+						
+
+						<div>
+							<button class="button green inline" id="configSaveButton">Save</button>
+							<button class="button red inline" id="configDialogClose">Cancel</button>
+						</div>
 					</div>
+					
 				</div>
 
 

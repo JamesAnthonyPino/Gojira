@@ -59,23 +59,38 @@ class Gojira {
         }
 
             // Construct the Help Dialog
-        const helpDialog = new Dialog({
-            title: "Help/About",
-            target: "#helpAboutDialog",
-            trigger: "#helpAboutLink"		
-        });
+        // const helpDialog = new Dialog({
+        //     title: "Help/About",
+        //     target: "#helpAboutDialog",
+        //     trigger: "#helpAboutLink"		
+        // });
 
         
         // Construct the configuration dialog
-        const configDialog = new Dialog({
-            title: "Configuration",	
-            target: "#configDialog",
-            trigger: "#configLink",
-            onOpen: this.handleConfigDialog	
-        });
+        // const configDialog = new Dialog({
+        //     title: "Configuration",	
+        //     target: "#configDialog",
+        //     trigger: "#configLink",
+        //     onOpen: this.handleConfigDialog	
+        // });
 
         
+		q("#helpAboutLink").onclick = () => {
+			q("#helpAboutDialog").showModal();
+		}
 
+		q("#helpAboutDialogClose").onclick = () => {
+			q("#helpAboutDialog").close();
+		}
+
+		q("#configLink").onclick = () => {
+			q("#configDialog").showModal();
+			this.handleConfigDialog();
+		}
+		
+		q("#configDialogClose").onclick = () => {
+			q("#configDialog").close();
+		}
 
         // Save configuration handler
         q("#configSaveButton").onclick = () => {
