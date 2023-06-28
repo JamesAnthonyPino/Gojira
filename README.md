@@ -14,12 +14,13 @@ After installing, to get Gojira working for your project, click the <b>configure
 * Don't forget to bookmark the page!
 
 ## Development
-Clone the source to your local system and run locally. There is no build or local server to run. Gojira runs on ES6 JavaScript, which is supported by most modern browsers and it uses plain JavaScript, CSS, and HTML, so no external libraries, preprocessors or transpilers are required.
+Clone the source to your local system and run locally. There is no build or local server to run. Gojira runs on ES7 JavaScript, which is supported by most modern browsers and it uses plain JavaScript, CSS, and HTML, so no external libraries, preprocessors or transpilers are required.
 
 ## Changelog
 *Note:* This changelog is only since v1.4.
 
  * v1.4 - added ability to sort history items alphabetically and chronologically, and to clear individual history items.
+ * v2.0 - Rewrite in ES7
 
 ## License
 This software is free and open source and is covered under the generic MIT License. See the LICENSE file included in this repository.
